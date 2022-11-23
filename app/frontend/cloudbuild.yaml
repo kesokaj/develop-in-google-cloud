@@ -1,0 +1,23 @@
+steps:
+  # Build and tag using commit sha
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '.', '-t', 'gcr.io/wtfpr-develop-in-gcp-kuu/frontend:$TAG_NAME', '-f', 'Dockerfile']
+    dir: 'build'
+  # Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/wtfpr-develop-in-gcp-kuu/frontend:$TAG_NAME']    
+  # Create release in Google Cloud Deploy
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args: 
+      [
+        "deploy", "releases", "create", "frontend-rel-$SHORT_SHA",
+        "--delivery-pipeline", "immortal-piglet-pipeline",
+        "--region", "europe-north1",
+        "--skaffold-file", "skaffold.yaml",
+        "--images", "frontend-image=gcr.io/wtfpr-develop-in-gcp-kuu/frontend:${TAG_NAME}"
+      ]
+images:
+  - "gcr.io/wtfpr-develop-in-gcp-kuu/frontend:$TAG_NAME"
+options:
+  logging: CLOUD_LOGGING_ONLY

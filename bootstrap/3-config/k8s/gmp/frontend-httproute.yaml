@@ -1,0 +1,17 @@
+---
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: gmp-frontend
+  namespace: gmp-public
+spec:
+ parentRefs:
+  - kind: Gateway
+    name: external-http
+    namespace: gateways
+ hostnames:
+ - "gmp.demo.spgo.se"
+ rules:
+ - backendRefs:
+   - name: frontend
+     port: 80

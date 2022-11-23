@@ -1,0 +1,23 @@
+<h1>Cloud Run Nginx v2</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  function parseHttpHeaders(httpHeaders) {
+      return httpHeaders.split("\n")
+       .map(x=>x.split(/: */,2))
+       .filter(x=>x[0])
+       .reduce((ac, x)=>{ac[x[0]] = x[1];return ac;}, {});
+  }
+  var req = new XMLHttpRequest();
+  req.open('HEAD', document.location, false);
+  req.send(null);
+  var headers = parseHttpHeaders(req.getAllResponseHeaders());
+  </script>
+
+  <script>
+  function here() {
+   document.write(JSON.stringify(headers["x-user"]));
+  }
+  </script>
+
+
+<h3><b><script>here();</script></b></h3>

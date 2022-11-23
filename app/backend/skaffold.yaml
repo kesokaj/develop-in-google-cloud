@@ -1,0 +1,8 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: backend
+deploy:
+  kubectl:
+    manifests:
+    - manifest.yaml

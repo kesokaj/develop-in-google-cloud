@@ -1,0 +1,106 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  namespace: gmp-public
+data:
+  prometheus.yaml: |-
+    {
+        "apiVersion": 1,
+        "datasources": [
+            {
+               "access":"proxy",
+                "editable": true,
+                "name": "prometheus",
+                "orgId": 1,
+                "type": "prometheus",
+                "url": "http://frontend.gmp-public.svc.cluster.local",
+                "version": 1
+            }
+        ]
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: gmp-public
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      name: grafana
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:latest
+        ports:
+        - name: grafana
+          containerPort: 3000
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+          requests: 
+            memory: "128Mi"
+            cpu: "50m"
+        volumeMounts:
+          - mountPath: /var/lib/grafana
+            name: grafana-storage
+          - mountPath: /etc/grafana/provisioning/datasources
+            name: grafana-datasources
+            readOnly: false
+      volumes:
+        - name: grafana-storage
+          emptyDir: {}
+        - name: grafana-datasources
+          configMap:
+              defaultMode: 420
+              name: grafana-datasources
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: grafana
+  namespace: gmp-public
+spec:
+  healthCheck:
+    requestPath: /api/health              
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: gmp-public
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"80":"grafana"}}'  
+spec:
+  selector: 
+    app: grafana
+  type: ClusterIP  
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: grafana
+  namespace: gmp-public
+spec:
+ parentRefs:
+  - kind: Gateway
+    name: external-http
+    namespace: gateways
+ hostnames:
+ - "grafana.demo.spgo.se"
+ rules:
+ - backendRefs:
+   - name: grafana
+     port: 80      

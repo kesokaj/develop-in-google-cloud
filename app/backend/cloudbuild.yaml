@@ -1,0 +1,23 @@
+steps:
+  # Stage 1
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '.', '-t', 'gcr.io/wtfpr-develop-in-gcp-kuu/backend:$TAG_NAME', '-f', 'Dockerfile']
+    dir: 'build' 
+  # Stage 2  
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/wtfpr-develop-in-gcp-kuu/backend:$TAG_NAME']  
+  # Stage 3
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args: 
+      [
+        "deploy", "releases", "create", "backend-rel-$SHORT_SHA",
+        "--delivery-pipeline", "immortal-piglet-pipeline",
+        "--region", "europe-north1",
+        "--skaffold-file", "skaffold.yaml",
+        "--images", "backend-image=gcr.io/wtfpr-develop-in-gcp-kuu/backend:${TAG_NAME}"
+      ]
+images:
+  - "gcr.io/wtfpr-develop-in-gcp-kuu/backend:$TAG_NAME"
+options:
+  logging: CLOUD_LOGGING_ONLY

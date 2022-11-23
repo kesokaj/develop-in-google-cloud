@@ -1,0 +1,5 @@
+admin_user = "simon@spgo.altostrat.com"
+project_name = "wtfpr-develop-in-gcp"
+billing_id = "01772D-655ECD-3E5261"
+region = "europe-north1"
+zone = "europe-north1-a"
