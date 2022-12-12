@@ -45,5 +45,6 @@ Identity, Gateway API
 terraform init && terraform plan && terraform apply --auto-approve
 terraform output -json | jq 'with_entries(.value |= .value)' > ../../app/values.json
 
-
+# Deploy frontend and backend
+Push frontend/backend to repo created by Terraform with TAG (v**). Application should should be triggered by Cloud Build and release will be created in Cloud Deploy.
 ````
