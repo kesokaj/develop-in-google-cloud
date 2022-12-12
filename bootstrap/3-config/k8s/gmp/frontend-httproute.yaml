@@ -10,7 +10,7 @@ spec:
     name: external-http
     namespace: gateways
  hostnames:
- - "gmp.devfest.spgo.se"
+ - "<YOUR_FQDN>"
  rules:
  - backendRefs:
    - name: frontend
