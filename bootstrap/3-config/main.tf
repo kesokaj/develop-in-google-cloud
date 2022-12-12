@@ -93,7 +93,7 @@ resource "null_resource" "gateways" {
   }
 }
 
-#cat k8s/gmp/frontend.yaml | sed 's/<PROJECT_ID>/wtfpr-develop-in-gcp-kuu/' | kubectl apply -f -
+#cat k8s/gmp/frontend.yaml | sed 's/<PROJECT_ID>/<YOUR_PROJECT_ID>/' | kubectl apply -f -
 resource "google_service_account_iam_policy" "workloadIdentity" {
   service_account_id = "${data.terraform_remote_state.environment.outputs.gke_svc_name}"
   policy_data = "${data.google_iam_policy.workloadIdentity.policy_data}"

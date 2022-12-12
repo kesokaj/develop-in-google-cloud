@@ -28,7 +28,7 @@ spec:
             cpu: "50m"        
         args:
         - "--web.listen-address=:9090"
-        - "--query.project-id=<PROJECT_ID>"
+        - "--query.project-id=there-is-no-lab-kqp"
         ports:
         - name: web
           containerPort: 9090

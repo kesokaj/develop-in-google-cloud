@@ -1,16 +1,16 @@
 data "terraform_remote_state" "common" {
   backend = "gcs"
   config = {
-    bucket  = "spgo-terraform-state"
-    prefix  = "wtfpr-develop-in-gcp/state/common"
+    bucket  = "<TERRAFORM_STATE_BUCKET>"
+    prefix  = "<PROJECT_ID>/state/common"
   }
 }
 
 data "terraform_remote_state" "network" {
   backend = "gcs"
   config = {
-    bucket  = "spgo-terraform-state"
-    prefix  = "wtfpr-develop-in-gcp/state/network"
+    bucket  = "<TERRAFORM_STATE_BUCKET>"
+    prefix  = "<PROJECT_ID>/state/network"
   }
 }
 

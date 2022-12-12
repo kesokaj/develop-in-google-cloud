@@ -99,7 +99,7 @@ spec:
     name: external-http
     namespace: gateways
  hostnames:
- - "grafana.demo.spgo.se"
+ - "grafana.devfest.spgo.se"
  rules:
  - backendRefs:
    - name: grafana

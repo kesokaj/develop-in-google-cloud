@@ -67,7 +67,7 @@ spec:
     name: external-http
     namespace: gateways
  hostnames:
- - "demoweb.demo.spgo.se"
+ - "demoweb.devfest.spgo.se"
  rules:
  - backendRefs:
    - name: demoweb

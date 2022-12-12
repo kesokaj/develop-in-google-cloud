@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
-    bucket  = "spgo-terraform-state"
-    prefix  = "wtfpr-develop-in-gcp/state/common"
+    bucket  = "<TERRAFORM_STATE_BUCKET>"
+    prefix  = "<PROJECT_ID>/state/common"
   }
   required_providers {
     google = {

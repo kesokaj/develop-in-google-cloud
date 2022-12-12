@@ -1,35 +1,35 @@
 data "terraform_remote_state" "common" {
   backend = "gcs"
   config = {
-    bucket  = "spgo-terraform-state"
-    prefix  = "wtfpr-develop-in-gcp/state/common"
+    bucket  = "<TERRAFORM_STATE_BUCKET>"
+    prefix  = "<PROJECT_ID>/state/common"
   }
 }
 
 data "terraform_remote_state" "network" {
   backend = "gcs"
   config = {
-    bucket  = "spgo-terraform-state"
-    prefix  = "wtfpr-develop-in-gcp/state/network"
+    bucket  = "<TERRAFORM_STATE_BUCKET>"
+    prefix  = "<PROJECT_ID>/state/network"
   }
 }
 
 data "terraform_remote_state" "environment" {
   backend = "gcs"
   config = {
-    bucket  = "spgo-terraform-state"
-    prefix  = "wtfpr-develop-in-gcp/state/environment"
+    bucket  = "<TERRAFORM_STATE_BUCKET>"
+    prefix  = "<PROJECT_ID>/state/environment"
   }
 }
 
 variable "loopia_user" {
-  default = "developingcp@loopiaapi"
+  default = "<API_USER>@loopiaapi"
 }
 
 variable "loopia_pw" {
-  default = "die0soongoangae5eewo3volooGhuoze"
+  default = "<YOUR_LOOPIA_PW>"
 }
 
 variable "loopia_dns" {
-  default = "spgo.se"
+  default = "<DNS>"
 }

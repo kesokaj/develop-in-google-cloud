@@ -5,4 +5,4 @@ metadata:
   name: configconnector.core.cnrm.cloud.google.com
 spec:
  mode: cluster
- googleServiceAccount: "gke-svc@wtfpr-develop-in-gcp-kuu.iam.gserviceaccount.com"
+ googleServiceAccount: "gke-svc@<PROJECT_ID>.iam.gserviceaccount.com"

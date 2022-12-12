@@ -2,7 +2,7 @@
 ## Build
 ##
 FROM golang:alpine AS build
-LABEL maintainer="Simon Östling <spgo@google.com>"
+LABEL maintainer="github.com/kesokaj"
 WORKDIR /build
 COPY . .
 RUN go build -o main

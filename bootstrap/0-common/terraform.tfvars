@@ -1,5 +1,5 @@
-admin_user = "simon@spgo.altostrat.com"
-project_name = "wtfpr-develop-in-gcp"
-billing_id = "01772D-655ECD-3E5261"
+admin_user = "<PROJECT_OWNER>"
+project_name = "<PROJECT_NAME>"
+billing_id = "<BILLING_ID>"
 region = "europe-north1"
 zone = "europe-north1-a"

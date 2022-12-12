@@ -1,3 +1,3 @@
 ```
-gcloud builds submit --tag gcr.io/wtfpr-develop-in-gcp-kuu/cbdemo:v1
+gcloud builds submit --tag gcr.io/<PROJECT_ID>/cbdemo:v1
 ```
