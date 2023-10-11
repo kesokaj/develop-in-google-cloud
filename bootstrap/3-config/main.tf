@@ -23,7 +23,7 @@ resource "tls_private_key" "private_key" {
 
 resource "acme_registration" "reg" {
   account_key_pem = tls_private_key.private_key.private_key_pem
-  email_address   = "ostling.simon@gmail.com"
+  email_address   = "<YOUR EMAIL>"
 }
 
 resource "acme_certificate" "certificate" {
